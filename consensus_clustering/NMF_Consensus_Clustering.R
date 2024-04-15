@@ -31,7 +31,7 @@ library("stringr")
 ################################################################################
 #Run the NMF consensus clustering adapted from Chapuy, Stewart, & Dunford et al. "Molecular subtypes of diffuse large B cell lymphoma are associated with distinct pathogenic mechanisms and outcomes." Nature Medicine, 30 April 2018. https://doi.org/10.1038/s41591-018-0016-8"
 
-setwd("/Users/ssharma/Desktop/git/consensus_clustering")
+setwd("~/consensus_clustering")
 source('src/GDAC_TopgenesforCluster/Topgenes_v1.R')
 result <- main("-s./src/GDAC_TopgenesforCluster/","-minput_data/WES_iteration_145.txt","-uALL","-oDLBCL")
 source("src/GDAC_NmfConsensusClustering/GDAC_CNMF.R", echo = TRUE)
@@ -42,7 +42,7 @@ result <- main("-uDLBCL.expclu.gct","-mPearson","-cDLBCL.cophenetic.coefficient.
 ################################################################################
 #This module uses the output from the above module and assigns membership to each patient and perform statistical test to get subtype enrichment based on user selected membership threshold. For this script, I used membership.3 as an example.
 # Remove X and - in sample names part of data cleaning
-setwd("/Users/ssharma/Desktop/git/consensus_clustering")
+setwd("~/consensus_clustering")
 data1<-read.table("DLBCL.membership.txt", header=TRUE, sep="\t", row.names=1)
 rownames(data1)<-gsub("^X", "", rownames(data1))
 rownames(data1)<-gsub("-", ".", rownames(data1))
@@ -267,9 +267,9 @@ dev.off()
 
 ##################Store Results at a particular membership #####################
 name<-memb
-dir.create(paste0("/Users/ssharma/Desktop/correction/consensus_clustering/", name, sep="_", "dir"))
-z<-paste0("/Users/ssharma/Desktop/correction/consensus_clustering/", name, sep="_", "dir")
-source_directory <- "/Users/ssharma/Desktop/correction/consensus_clustering/"
+dir.create(paste0("~/consensus_clustering/", name, sep="_", "dir"))
+z<-paste0("~/consensus_clustering/", name, sep="_", "dir")
+source_directory <- "~/consensus_clustering/"
 destination_directory <- z
 files_to_copy <- list.files(source_directory, pattern = "^DLBCL", full.names = TRUE)
 file.copy(files_to_copy, destination_directory, overwrite = FALSE)
